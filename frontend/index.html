@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Agriculture System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1><i class="fas fa-seedling"></i> Smart Agriculture</h1>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#yield" class="nav-link">Yield Prediction</a>
+                <a href="#disease" class="nav-link">Disease Detection</a>
+                <a href="#recommendations" class="nav-link">Recommendations</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h2>Smart Agriculture Management System</h2>
+                <p>Leverage AI and Deep Learning for better crop management, disease detection, and yield optimization</p>
+                <div class="feature-cards">
+                    <div class="card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Yield Prediction</h3>
+                        <p>Predict crop yields based on environmental and soil conditions</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-microscope"></i>
+                        <h3>Disease Detection</h3>
+                        <p>Identify plant diseases from leaf images using AI</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Smart Recommendations</h3>
+                        <p>Get personalized farming tips and treatment suggestions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Yield Prediction Section -->
+        <section id="yield" class="section">
+            <div class="container">
+                <h2><i class="fas fa-chart-line"></i> Crop Yield Prediction</h2>
+                <div class="form-container">
+                    <form id="yieldForm" class="prediction-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="area">Farm Area (hectares)</label>
+                                <input type="number" id="area" name="area" step="0.1" min="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="crop_type">Crop Type</label>
+                                <select id="crop_type" name="crop_type" required>
+                                    <option value="">Select Crop</option>
+                                    <option value="wheat">Wheat</option>
+                                    <option value="rice">Rice</option>
+                                    <option value="corn">Corn</option>
+                                    <option value="soybean">Soybean</option>
+                                    <option value="cotton">Cotton</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="rainfall">Annual Rainfall (mm)</label>
+                                <input type="number" id="rainfall" name="rainfall" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="temperature">Average Temperature (°C)</label>
+                                <input type="number" id="temperature" name="temperature" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="humidity">Humidity (%)</label>
+                                <input type="number" id="humidity" name="humidity" min="0" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ph">Soil pH</label>
+                                <input type="number" id="ph" name="ph" step="0.1" min="0" max="14" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nitrogen">Nitrogen (N) kg/ha</label>
+                                <input type="number" id="nitrogen" name="nitrogen" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phosphorus">Phosphorus (P) kg/ha</label>
+                                <input type="number" id="phosphorus" name="phosphorus" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="potassium">Potassium (K) kg/ha</label>
+                                <input type="number" id="potassium" name="potassium" min="0" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-calculator"></i> Predict Yield
+                        </button>
+                    </form>
+                    <div id="yieldResults" class="results-container" style="display: none;">
+                        <h3>Prediction Results</h3>
+                        <div id="yieldOutput"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disease Detection Section -->
+        <section id="disease" class="section">
+            <div class="container">
+                <h2><i class="fas fa-microscope"></i> Plant Disease Detection</h2>
+                <div class="upload-container">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload or drag and drop plant leaf image</p>
+                        <input type="file" id="imageInput" accept="image/*" hidden>
+                    </div>
+                    <div id="imagePreview" class="image-preview" style="display: none;">
+                        <img id="previewImg" alt="Preview">
+                        <button id="analyzeBtn" class="btn-primary">
+                            <i class="fas fa-search"></i> Analyze Disease
+                        </button>
+                    </div>
+                    <div id="diseaseResults" class="results-container" style="display: none;">
+                        <h3>Analysis Results</h3>
+                        <div id="diseaseOutput"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations" class="section">
+            <div class="container">
+                <h2><i class="fas fa-lightbulb"></i> Farming Recommendations</h2>
+                <div class="form-container">
+                    <form id="recommendationForm" class="recommendation-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="rec_crop_type">Crop Type</label>
+                                <select id="rec_crop_type" name="crop_type" required>
+                                    <option value="">Select Crop</option>
+                                    <option value="wheat">Wheat</option>
+                                    <option value="rice">Rice</option>
+                                    <option value="corn">Corn</option>
+                                    <option value="soybean">Soybean</option>
+                                    <option value="cotton">Cotton</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="season">Season</label>
+                                <select id="season" name="season" required>
+                                    <option value="">Select Season</option>
+                                    <option value="spring">Spring</option>
+                                    <option value="summer">Summer</option>
+                                    <option value="fall">Fall</option>
+                                    <option value="winter">Winter</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" name="location" placeholder="Enter your location" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-magic"></i> Get Recommendations
+                        </button>
+                    </form>
+                    <div id="recommendationResults" class="results-container" style="display: none;">
+                        <h3>Farming Recommendations</h3>
+                        <div id="recommendationOutput"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Smart Agriculture System. Powered by Deep Learning & AI.</p>
+        </div>
+    </footer>
+
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
